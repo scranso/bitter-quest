@@ -1,54 +1,40 @@
-// import NavBar from "app/components/navbar";
 import React from 'react';
 import './globals.css';
-import CSS from "csstype";
+import CSS from 'csstype';
 
 const headerStyle: CSS.Properties = {
   backgroundColor: 'lightblue',
   padding: '2rem',
   textAlign: 'center',
+  borderBottom: '2px solid #ddd',
 };
 
 const footerStyle: CSS.Properties = {
   backgroundColor: 'ghostwhite',
   padding: '1rem',
   textAlign: 'center',
+  borderTop: '2px solid #ddd',
 };
-
-
-
-const h1Styles: CSS.Properties = {
-  backgroundColor: "rgba(255, 255, 255, 0.85)",
-  position: "absolute",
-  right: 0,
-  bottom: "2rem",
-  padding: "0.5rem",
-  fontFamily: "sans-serif",
-  fontSize: "1.5rem",
-  boxShadow: "0 0 10px rgba(0, 0, 0, 0.3)",
-};
-
-export function Heading({ title } : { title: string } ) {
-  return <h1 style={h1Styles}>{title}</h1>;
-}
 
 export const metadata = {
   title: 'Bitter Quest',
-  description: 'Amari and Liqueur Finder',
-}
+  description: 'Amari and Liqueur Finder: Discover the best amari and liqueur options in your area!',
+};
 
-export default function RootLayout({ children }: {children: React.ReactNode }) {
+export default function RootLayout() {
   return (
     <html lang="en">
       <body>
         <header style={headerStyle}>
           <h1>Welcome to Bitter Quest</h1>
-          
+          <p>Find the amari and liqueur you need before you reach for your keys!</p> 
         </header>
-        {/* <NavBar /> */}
-        {children}
+        <main>
+          <h2>What are you looking for?</h2>
+          <p>This is filler content!</p>
+        </main> 
         <footer style={footerStyle}>
-          <p>Footer Content</p>
+          <p>2025 Bitter Quest | All rights reserved. </p>
         </footer>
       </body>
     </html>

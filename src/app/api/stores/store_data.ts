@@ -1,4 +1,4 @@
-export const store_data = [
+export const stores = [
 {
     id: 1,
     name: "Total Wine and Spirits - St. Mathews",

@@ -1,4 +1,6 @@
-export const product_data = [
+// import { NextResponse } from "next/server";
+
+export const products = [
 
     {
         id: 1,
@@ -221,4 +223,5 @@ export const product_data = [
     },
 
 
-    ]
+    ];
+    
