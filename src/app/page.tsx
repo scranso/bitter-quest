@@ -1,5 +1,35 @@
+"use client"
 import React, {useState, useEffect} from 'react';
-import Layout from './layout';
+// import Layout from './layout';
+
+interface StoreAvailability {
+  availability: boolean;
+  price?: number;
+}
+
+type StoreData = Record<number, StoreAvailability>;
+
+interface Product {
+  id: number;
+  name: string;
+  description: string;
+  type: string;
+  store_data: StoreData;
+  price?: number; // Uncomment this line if you want to include price in the Product interface
+  // ships_locally?: boolean; // Uncomment this line if you want to include ships_locally in the Product interface
+}
+
+interface Store {
+  id: number;
+  name: string;
+  address: string;
+  phone: string;
+  website: string;
+  // ships_locally?: boolean; // Uncomment this line if you want to include ships_locally in the Store interface
+}
+
+
+
 
 const HomePage: React.FC = () => {
   const [stores, setStores] = useState<Store[]>([]); // State for stores data
@@ -38,14 +68,14 @@ const HomePage: React.FC = () => {
   // };
 
   return (
-    <Layout>
+    <>
       <div style={{ padding: '20px' }}>
         <div style={{ marginBottom: '30px', textAlign: 'center' }}>
           <h2>What are you looking for?</h2>
           <p>Find the best amari and liqueurs near your location with ease!</p>
         </div>
 
-        {/* Results Section: Stores */}
+         {/* Results Section: Stores  */}
         <div>
           <h3>Nearby Stores</h3>
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px' }}>
@@ -53,7 +83,7 @@ const HomePage: React.FC = () => {
               <div key={index} style={{ border: '1px solid #ddd', padding: '15px', borderRadius: '5px' }}>
                 <h4>{store.name}</h4>
                 <p>{store.address}</p>
-                <p>{store.description}</p>
+                {/* <p>{store.description}</p> */}
                 <button
                   style={{
                     padding: '8px 16px',
@@ -97,7 +127,7 @@ const HomePage: React.FC = () => {
           </div>
         </div>
       </div>
-    </Layout>
+    </>
   );
 };
 

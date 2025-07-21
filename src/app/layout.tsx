@@ -21,7 +21,7 @@ export const metadata = {
   description: 'Amari and Liqueur Finder: Discover the best amari and liqueur options in your area!',
 };
 
-export default function RootLayout() {
+export default function RootLayout({children}: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <body>
@@ -30,8 +30,9 @@ export default function RootLayout() {
           <p>Find the amari and liqueur you need before you reach for your keys!</p> 
         </header>
         <main>
-          <h2>What are you looking for?</h2>
-          <p>This is filler content!</p>
+          {children}
+          {/* <h2>What are you looking for?</h2>
+          <p>This is filler content!</p> */}
         </main> 
         <footer style={footerStyle}>
           <p>2025 Bitter Quest | All rights reserved. </p>

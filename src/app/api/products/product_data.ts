@@ -1,6 +1,6 @@
 // import { NextResponse } from "next/server";
 
-export const products = [
+export const product_data = [
 
     {
         id: 1,
