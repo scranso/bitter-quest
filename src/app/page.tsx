@@ -1,4 +1,4 @@
-"use client"
+"use client" // because useState is needed (componenet requiring client-side state management) and useEffect (also interacting with browser) and generally using local storage
 import React, {useState, useEffect} from 'react';
 // import Layout from './layout';
 
@@ -14,9 +14,9 @@ interface Product {
   name: string;
   description: string;
   type: string;
-  store_data: StoreData;
-  price?: number; // Uncomment this line if you want to include price in the Product interface
-  // ships_locally?: boolean; // Uncomment this line if you want to include ships_locally in the Product interface
+  store_data: StoreData; // This is where I think the issue is in generating the store data in the table.
+  price?: number; 
+  // ships_locally?: boolean; 
 }
 
 interface Store {
@@ -25,26 +25,27 @@ interface Store {
   address: string;
   phone: string;
   website: string;
-  // ships_locally?: boolean; // Uncomment this line if you want to include ships_locally in the Store interface
+  // ships_locally?: boolean; 
 }
 
 
 
 
 const HomePage: React.FC = () => {
-  const [stores, setStores] = useState<Store[]>([]); // State for stores data
-  const [products, setProducts] = useState<Product[]>([]); // State for products data
+  const [stores, setStores] = useState<Store[]>([]); // State for stores data, initialized as an empty array
+  const [products, setProducts] = useState<Product[]>([]); // State for products data initialized as an empty array
 
   // Fetching data from API endpoints
   const fetchStores = async () => {
-    const response = await fetch('/api/stores/route'); // API endpoint for stores?
+    const response = await fetch('/api/stores'); // API endpoint for stores?
     const data = await response.json();
+    // console.log('Stores fetched:', data);
     setStores(data);
   };
 
   // Fetching data from API endpoints
   const fetchProducts = async () => {
-    const response = await fetch('/api/products/route'); // API endpoint for products?
+    const response = await fetch('/api/products'); // API endpoint for products?
     const data = await response.json();
     setProducts(data);
   };
@@ -55,17 +56,6 @@ const HomePage: React.FC = () => {
     fetchProducts();
   }, []);
 
-  // const headerStyle = {
-  //   backgroundColor: 'lightblue',
-  //   padding: '2rem',
-  //   textAlign: 'center',
-  //   borderBottom: '2px solid #ddd',
-  // };
-
-  // const paragraphStyle = {
-  //   padding: '1rem',
-  //   textAlign: 'center',
-  // };
 
   return (
     <>
@@ -75,54 +65,45 @@ const HomePage: React.FC = () => {
           <p>Find the best amari and liqueurs near your location with ease!</p>
         </div>
 
-         {/* Results Section: Stores  */}
-        <div>
-          <h3>Nearby Stores</h3>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px' }}>
-            {stores.map((store, index) => (
-              <div key={index} style={{ border: '1px solid #ddd', padding: '15px', borderRadius: '5px' }}>
-                <h4>{store.name}</h4>
-                <p>{store.address}</p>
-                {/* <p>{store.description}</p> */}
-                <button
-                  style={{
-                    padding: '8px 16px',
-                    backgroundColor: '#28a745',
-                    color: 'white',
-                    border: 'none',
-                    borderRadius: '5px',
-                    cursor: 'pointer',
-                  }}
-                >
-                  View Details
-                </button>
+         {/* Price Grid Section */}
+        <div style={{ marginTop: '40px', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+          <h3>Store vs Product Price Grid</h3>
+          
+          {/* Table for Store vs Product */}
+          <div style={{ display: 'grid', gridTemplateColumns: `150px repeat(${products.length}, 1fr)`, gap: '10px', textAlign: 'center' }}>
+            
+            {/* Header Row with Product Names */}
+            <div style={{ fontWeight: 'bold' }}>Stores</div>
+            {products.map((product, index) => (
+              <div key={index} style={{ fontWeight: 'bold' }}>
+                {product.name}
               </div>
             ))}
-          </div>
-        </div>
 
-        {/* Results Section: Products */}
-        <div style={{ marginTop: '40px' }}>
-          <h3>Available Products</h3>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px' }}>
-            {products.map((product, index) => (
-              <div key={index} style={{ border: '1px solid #ddd', padding: '15px', borderRadius: '5px' }}>
-                <h4>{product.name}</h4>
-                <p>{product.description}</p>
-                <p><strong>Price: ${product.price}</strong></p>
-                <button
-                  style={{
-                    padding: '8px 16px',
-                    backgroundColor: '#007BFF',
-                    color: 'white',
-                    border: 'none',
-                    borderRadius: '5px',
-                    cursor: 'pointer',
-                  }}
-                >
-                  View Details
-                </button>
-              </div>
+            {/* Store Data Rows */}
+            {stores.map((store) => (
+              <React.Fragment key={store.id}>
+                {/* Store Name in the first column */}
+                <div>{store.name}</div>
+                
+                {/* Display the price for each store/product intersection */}
+                {products.map((product) => {
+                  const storeAvailability = product.store_data[store.id];
+                  return (
+                    <div key={product.id}>
+                      {storeAvailability ? (
+                        storeAvailability.availability ? (
+                          <span>${storeAvailability.price}</span>
+                        ) : (
+                          <span>Out of Stock</span>
+                        )
+                      ) : (
+                        <span>No Data</span>
+                      )}
+                    </div>
+                  );
+                })}
+              </React.Fragment>
             ))}
           </div>
         </div>
