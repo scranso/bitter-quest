@@ -9,41 +9,41 @@ export const product_data = [
         // price: 68.99,
         type: "Liqueur",
 
-        store_data: [
+        store_data: 
             {   1:{
-                    availbilty: false, 
+                    availability: false, 
                     
                     },
                 2:{
-                    availbilty: false, 
+                    availability: false, 
                     
                    },
                 3:{
-                    availbilty: false, 
+                    availability: false, 
                     
                     },
                 4:{
-                    availbilty: false, 
+                    availability: false, 
                     
                     },
                 5:{
-                    availbilty: true, 
+                    availability: true, 
                     price: 68.99
                     },
                 6:{
-                    availbilty: false, 
+                    availability: false, 
                     
                     },
                 7:{
-                    availbilty: true, 
+                    availability: true, 
                     price: 129.99,
                     },
                 8:{
-                    availbilty: true, 
+                    availability: true, 
                     price: 64.97
                     },
             }
-        ]
+        
     },
 
     {
@@ -53,41 +53,41 @@ export const product_data = [
         // price: 26.99,
         type: "Amaro",
 
-        store_data: [
+        store_data: 
             {   1:{
-                    availbilty: false, 
+                    availability: false, 
                     
                     },
                 2:{
-                    availbilty: false, 
+                    availability: false, 
                     
                    },
                 3:{
-                    availbilty: false, 
+                    availability: false, 
                     
                     },
                 4:{
-                    availbilty: true, 
+                    availability: true, 
                     price: 26.99
                     },
                 5:{
-                    availbilty: false, 
+                    availability: false, 
                     
                     },
                 6:{
-                    availbilty: false, 
+                    availability: false, 
                     
                     },
                 7:{
-                    availbilty: false, 
+                    availability: false, 
                     
                     },
                 8:{
-                    availbilty: false, 
+                    availability: false, 
                     
                     },
             }
-        ]
+        
     },
 
     {
@@ -97,41 +97,41 @@ export const product_data = [
         // price: 45.99,
         type: "Liqueur",
 
-        store_data: [
+        store_data: 
             {   1:{
-                    availbilty: false, 
+                    availability: false, 
                     
                     },
                 2:{
-                    availbilty: true, 
+                    availability: true, 
                     price: 45.99
                    },
                 3:{
-                    availbilty: false, 
+                    availability: false, 
                     
                     },
                 4:{
-                    availbilty: false, 
+                    availability: false, 
                     
                     },
                 5:{
-                    availbilty: false, 
+                    availability: false, 
                     
                     },
                 6:{
-                    availbilty: true, 
+                    availability: true, 
                     price: 42.99
                     },
                 7:{
-                    availbilty: false, 
+                    availability: false, 
                     
                     },
                 8:{
-                    availbilty: false, 
+                    availability: false, 
                     
                     },
             }
-        ]
+        
     },
 
     {
@@ -141,41 +141,41 @@ export const product_data = [
         // price: 28.09,
         type: "Vermouth",
 
-        store_data: [
+        store_data: 
             {   1:{
-                    availbilty: true, 
+                    availability: true, 
                     price: 28.09
                     },
                 2:{
-                    availbilty: true, 
+                    availability: true, 
                     price: 39.99
                    },
                 3:{
-                    availbilty: true, 
+                    availability: true, 
                     price: 39.99
                     },
                 4:{
-                    availbilty: true, 
+                    aavailability: true, 
                     price: 32.99
                     },
                 5:{
-                    availbilty: true, 
+                    availability: true, 
                     price: 33.99
                     },
                 6:{
-                    availbilty: true, 
+                    availability: true, 
                     price: 44.99
                     },
                 7:{
-                    availbilty: true, 
+                    availability: true, 
                     price: 34.99
                     },
                 8:{
-                    availbilty: false, 
+                    availability: false, 
                     
                     },
             }
-        ]
+        
     },
 
     {
@@ -185,41 +185,41 @@ export const product_data = [
         // price: 59.99,
         type: "Liqueur",
 
-        store_data: [
+        store_data: 
             {   1:{
-                    availbilty: true, 
+                    availability: true, 
                     price: 29.99
                     },
                 2:{
-                    availbilty: false, 
+                    availability: false, 
                     
                    },
                 3:{
-                    availbilty: false, 
+                    aavailability: false, 
                     
                     },
                 4:{
-                    availbilty: true, 
+                    availability: true, 
                     price: 18.99
                     },
                 5:{
-                    availbilty: false, 
+                    availability: false, 
                     
                     },
                 6:{
-                    availbilty: true, 
+                    availability: true, 
                     price: 27.99
                     },
                 7:{
-                    availbilty: false, 
+                    availability: false, 
                     
                     },
                 8:{
-                    availbilty: false, 
+                    availability: false, 
                     
                     },
             }
-        ]
+        
     },
 
 
