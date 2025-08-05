@@ -1,6 +1,27 @@
 "use client" // because useState is needed (componenet requiring client-side state management) and useEffect (also interacting with browser) and generally using local storage
 import React, {useState, useEffect} from 'react';
+import Link from 'next/link';
+
 // import Layout from './layout';
+
+interface StoreAvailabilityProps {
+  availability: boolean;
+  price?: number;
+  onClick: () => void;
+}
+
+function handleClick() {
+  console.log('Button clicked');
+}
+
+// const StoreAvailability: React.FC<StoreAvailabilityProps> = ({ availability, price }) => {
+//   console.log('Price:', price);
+//   return (
+//     <button onClick={handleClick} disabled={!price}> 
+//       {availability? `$${price}` : 'Not Available'}
+//     </button>
+//   );
+// }
 
 interface StoreAvailability {
   availability: boolean;
@@ -14,7 +35,7 @@ interface Product {
   name: string;
   description: string;
   type: string;
-  store_data: StoreData; // This is where I think the issue is in generating the store data in the table.
+  store_data: StoreData; 
   price?: number; 
   // ships_locally?: boolean; 
 }
@@ -35,7 +56,7 @@ const HomePage: React.FC = () => {
   const [stores, setStores] = useState<Store[]>([]); // State for stores data, initialized as an empty array
   const [products, setProducts] = useState<Product[]>([]); // State for products data initialized as an empty array
 
-  // Fetching data from API endpoints
+  // Fetching data from API stores endpoints
   const fetchStores = async () => {
     const response = await fetch('/api/stores'); // API endpoint for stores?
     const data = await response.json();
@@ -43,12 +64,15 @@ const HomePage: React.FC = () => {
     setStores(data);
   };
 
-  // Fetching data from API endpoints
+  // Fetching data from API products endpoints
   const fetchProducts = async () => {
     const response = await fetch('/api/products'); // API endpoint for products?
     const data = await response.json();
     setProducts(data);
   };
+
+
+
 
   // Fetching data when the component mounts
   useEffect(() => {
@@ -65,32 +89,38 @@ const HomePage: React.FC = () => {
           <p>Find the best amari and liqueurs near your location with ease!</p>
         </div>
 
-         {/* Price Grid Section */}
+         {/* <div style={{ display: 'flex', justifyContent: 'space-between', gap: '20px' }}> */}
+          {/* search bar */}
+          {/* <input type="text" placeholder="Search for a store..." />
+          <input type="text" placeholder="Search for a product..." />
+        </div> */}
+
         <div style={{ marginTop: '40px', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-          <h3>Store vs Product Price Grid</h3>
+          <h3>Stores vs Products</h3>
           
-          {/* Table for Store vs Product */}
-          <div style={{ display: 'grid', gridTemplateColumns: `150px repeat(${products.length}, 1fr)`, gap: '10px', textAlign: 'center' }}>
+          {/* table for store vs product */}
+          <div style={{ display: 'grid', gridTemplateColumns: `150px repeat(${products.length}, 1fr)`, gap: '10px', textAlign: 'center', border: '2px solid #ddd' }}>
             
-            {/* Header Row with Product Names */}
-            <div style={{ fontWeight: 'bold' }}>Stores</div>
+            {/* header row with product names - needs adjusting of "store" placement */}
+            <div style={{ fontWeight: 'bold', borderRight: '2px solid #ddd', padding: '10px' }}>Stores</div>
             {products.map((product, index) => (
-              <div key={index} style={{ fontWeight: 'bold' }}>
+              <div key={index} style={{ fontWeight: 'bold', borderBottom: '2px solid #ddd', padding: '10px' }}>
                 {product.name}
               </div>
             ))}
 
-            {/* Store Data Rows */}
+            {/* store data rows */}
             {stores.map((store) => (
               <React.Fragment key={store.id}>
-                {/* Store Name in the first column */}
-                <div>{store.name}</div>
+                {/* store name - first column */}
+                <div style={{ padding: '10px', borderBottom: '2px solid #ddd', borderRight: '2px solid #ddd'}}>{store.name}</div>
                 
-                {/* Display the price for each store/product intersection */}
+                {/* display the price for each store/product intersection */}
                 {products.map((product) => {
                   const storeAvailability = product.store_data[store.id];
                   return (
-                    <div key={product.id}>
+                    // creates a button for each product availability for the current store
+                    <button onClick={handleClick} key={product.id} style={{ padding: '10px', borderBottom: '2px solid #ddd', borderRight: '2px solid #ddd'}}>
                       {storeAvailability ? (
                         storeAvailability.availability ? (
                           <span>${storeAvailability.price}</span>
@@ -100,7 +130,7 @@ const HomePage: React.FC = () => {
                       ) : (
                         <span>No Data</span>
                       )}
-                    </div>
+                    </button>
                   );
                 })}
               </React.Fragment>
@@ -111,5 +141,7 @@ const HomePage: React.FC = () => {
     </>
   );
 };
+  export default HomePage;
 
-export default HomePage;
+
+
