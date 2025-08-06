@@ -19,7 +19,8 @@ const HomePage: React.FC = () => {
 }
 
 const handleClick = (storeId: number, productId: number) => {
-  router.push(`/stores/${storeId}/product/${productId}`);
+  // router.push(`/stores/${storeId}/product/${productId}`);
+  router.push(`/stores/${storeId}`);
   
 };
 
