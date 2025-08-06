@@ -1,22 +1,27 @@
 "use client" // because useState is needed (componenet requiring client-side state management) and useEffect (also interacting with browser) and generally using local storage
 import React, {useState, useEffect} from 'react';
-import { useRouter } from 'next/router';
-import Link from 'next/link';
-import ProductDetails from './products/[productId]/page';
+import { useRouter } from 'next/navigation';
+
 
 // import Layout from './layout';
 
-interface StoreAvailabilityProps {
+const HomePage: React.FC = () => {
+  const [stores, setStores] = useState<Store[]>([]); // State for stores data, initialized as an empty array
+  const [products, setProducts] = useState<Product[]>([]); // State for products data initialized as an empty array
+  // const [isMounted, setIsMounted] = useState(false); // State for checking if component is mounted
+  const router = useRouter(); // Using the router to navigate to other pages
+
+
+  interface StoreAvailability {
   availability: boolean;
   price?: number;
   onClick: () => void;
 }
 
-function handleClick() {
-  return alert('Redirecting to product details...');
-  // router.push(`/products/${productId}`);
-  <Link href={`/products/${productId}`}>Redirect to product details</Link>;
-}
+const handleClick = (storeId: number, productId: number) => {
+  router.push(`/stores/${storeId}/product/${productId}`);
+  
+};
 
 // const StoreAvailability: React.FC<StoreAvailabilityProps> = ({ availability, price }) => {
 //   console.log('Price:', price);
@@ -27,10 +32,10 @@ function handleClick() {
 //   );
 // }
 
-interface StoreAvailability {
-  availability: boolean;
-  price?: number;
-}
+// interface StoreAvailability {
+//   availability: boolean;
+//   price?: number;
+// }
 
 type StoreData = Record<number, StoreAvailability>;
 
@@ -56,10 +61,6 @@ interface Store {
 
 
 
-const HomePage: React.FC = () => {
-  const [stores, setStores] = useState<Store[]>([]); // State for stores data, initialized as an empty array
-  const [products, setProducts] = useState<Product[]>([]); // State for products data initialized as an empty array
-
   // Fetching data from API stores endpoints
   const fetchStores = async () => {
     const response = await fetch('/api/stores'); // API endpoint for stores?
@@ -82,8 +83,10 @@ const HomePage: React.FC = () => {
   useEffect(() => {
     fetchStores();
     fetchProducts();
+    // setIsMounted(true);
   }, []);
 
+  // if (!isMounted) return null; // Only render if component is mounted
 
   return (
     <>
@@ -124,7 +127,7 @@ const HomePage: React.FC = () => {
                   const storeAvailability = product.store_data[store.id];
                   return (
                     // creates a button for each product availability for the current store
-                    <button onClick={handleClick} key={product.id} style={{ padding: '10px', borderBottom: '2px solid #ddd', borderRight: '2px solid #ddd'}}>
+                    <button key={product.id} onClick={() => handleClick(store.id, product.id)}  style={{ padding: '10px', borderBottom: '2px solid #ddd', borderRight: '2px solid #ddd'}}>
                       {storeAvailability ? (
                         storeAvailability.availability ? (
                           <span>${storeAvailability.price}</span>

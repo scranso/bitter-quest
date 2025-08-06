@@ -1,6 +1,6 @@
 "use client" // because useState is needed (componenet requiring client-side state management) and useEffect (also interacting with browser) and generally using local storage
 import React, {useState, useEffect} from 'react';
-import Link from 'next/link';
+// import Link from 'next/link';
 
 
 // import Layout from './layout';
@@ -11,24 +11,11 @@ interface StoreAvailability {
   onClick: () => void;
 }
 
-function handleClick() {
-  return alert('Redirecting to product details...');
+// function handleClick() {
+//   return alert('Redirecting to product details...');
   
-}
-
-// const StoreAvailability: React.FC<StoreAvailabilityProps> = ({ availability, price }) => {
-//   console.log('Price:', price);
-//   return (
-//     <button onClick={handleClick} disabled={!price}> 
-//       {availability? `$${price}` : 'Not Available'}
-//     </button>
-//   );
 // }
 
-// interface StoreAvailability {
-//   availability: boolean;
-//   price?: number;
-// }
 
 type StoreData = Record<number, StoreAvailability>;
 
@@ -52,11 +39,11 @@ interface Store {
 }
 
 
+// const HomePage: React.FC = () => {
+//   const [stores, setStores] = useState<Store[]>([]); // State for stores data, initialized as an empty array
+//   const [products, setProducts] = useState<Product[]>([]); // State for products data initialized as an empty array
 
 
-const HomePage: React.FC = () => {
-  const [stores, setStores] = useState<Store[]>([]); // State for stores data, initialized as an empty array
-  const [products, setProducts] = useState<Product[]>([]); // State for products data initialized as an empty array
 
   // Fetching data from API stores endpoints
   const fetchStores = async () => {
@@ -74,20 +61,18 @@ const HomePage: React.FC = () => {
   };
 
 
-
-
   // Fetching data when the component mounts
   useEffect(() => {
     fetchStores();
     fetchProducts();
   }, []);
 
-
+  const StoresPage: React.FC = () => {
   return (
     <>
       <div style={{ padding: '20px' }}>
         <div style={{ marginBottom: '30px', textAlign: 'center' }}>
-          <h2>What are you looking for?</h2>
+          <h1>Stores Overview</h1>
           
         </div>
 
@@ -97,13 +82,12 @@ const HomePage: React.FC = () => {
           <input type="text" placeholder="Search for a product..." />
         </div> */}
 
-        
-       
       </div>
     </>
   );
 };
-  export default HomePage;
+export default StoresPage;
+//   export default HomePage;
 
 
 
