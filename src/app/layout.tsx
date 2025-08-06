@@ -35,7 +35,7 @@ export default function RootLayout({children}: { children: React.ReactNode }) {
           <p>This is filler content!</p> */}
         </main> 
         <footer style={footerStyle}>
-          <p>2025 Bitter Quest | All rights reserved. </p>
+          <p>2025 Bitter Quest </p>
         </footer>
       </body>
     </html>
