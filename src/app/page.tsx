@@ -20,23 +20,11 @@ const HomePage: React.FC = () => {
 
 const handleClick = (storeId: number, productId: number) => {
   // router.push(`/stores/${storeId}/product/${productId}`);
-  router.push(`/stores/${storeId}`);
+  router.push(`/stores/${storeId}/product/${productId}`);
   
 };
 
-// const StoreAvailability: React.FC<StoreAvailabilityProps> = ({ availability, price }) => {
-//   console.log('Price:', price);
-//   return (
-//     <button onClick={handleClick} disabled={!price}> 
-//       {availability? `$${price}` : 'Not Available'}
-//     </button>
-//   );
-// }
 
-// interface StoreAvailability {
-//   availability: boolean;
-//   price?: number;
-// }
 
 type StoreData = Record<number, StoreAvailability>;
 

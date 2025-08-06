@@ -67,11 +67,11 @@ import React from'react';
 // }
 
 
-export default function StoresLayout ({ children }: { children: React.ReactNode }) {
-    return (
-        <div>
-            <header>Stores Page Header</header>
-            <main>{children}</main>
-        </div>
-    );
-};
+// export default function StoresLayout ({ children }: { children: React.ReactNode }) {
+//     return (
+//         <div>
+//             <header>Stores Page Header</header>
+//             <main>{children}</main>
+//         </div>
+//     );
+// };
