@@ -40,7 +40,12 @@ interface Product {
     name: string;
     description: string;
     type: string;
-    storeId: string;
+    store_data: {
+        [storeId: string]: {
+            available: boolean;
+            price: number;
+        }
+    };
     price: number;
     // shipsLocally: boolean;
     // availability: StoreAvailability;
@@ -79,9 +84,16 @@ const fetchData = async () => {
 
         const storeData: Store = await storeResponse.json();
         const productData: Product = await productResponse.json();
+
+        const priceForStore = productData.store_data[storeId]?.price;
+
         console.log('fetched product data:', productData);
+
         setStore(storeData);
-        setProduct(productData);
+        setProduct({
+            ...productData,
+            price: priceForStore,
+        });
     } catch (error) {
         console.error('Error fetching data:', error);
     } finally {
@@ -147,7 +159,7 @@ const fetchData = async () => {
         <>
           <p><strong>Product Name:</strong> {product.name}</p>
           <p><strong>Description:</strong> {product.description}</p>
-          <p><strong>Price:</strong> ${product.price !== undefined ? '$${product.price.toFixed(2)}' : 'Price not available'}</p>
+          <p><strong>Price:</strong> {product.price !== undefined ? `$${product.price.toFixed(2)}` : 'Price Not Available'} </p> 
         </>
       ) : (
         <p>Product data not found.</p>
