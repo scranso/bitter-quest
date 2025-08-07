@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import Image from 'next/image';
+import Link from 'next/link';
 
 interface Store {
     id: string;
@@ -23,7 +24,7 @@ interface Product {
             price: number;
         }
     };
-    price: number;
+    // price: number;
     // shipsLocally: boolean;
     // availability: StoreAvailability;
 }
@@ -37,23 +38,7 @@ const productImages: { [key: string]: string } = { // Defining product images
 };
 
 
-// function calculateValueScore(price: number, distance: string): number {
-//     // Convert distance to a number 
-//     const distanceNum = parseFloat(distance.replace(' miles', ''));
-    
-//     // Calculate base score (lower is better)
-//     let score = price * distanceNum;
-    
-//     // Apply modifiers based on distance
-//     if (distanceNum < 1) {
-//       score *= 0.9; // 10% bonus for very close stores
-//     } else if (distanceNum > 5) {
-//       score *= 1.1; // 10% penalty for far stores
-//     }
-    
-//     // Invert the score so higher is better
-//     return Math.round((1000 / score) * 100) /100; // round to 2 decimal places
-//   }
+
 
 const distanceOptions = [
     {value: 'all', label: 'All Distances'},
@@ -82,7 +67,7 @@ const IndividualStorePage: React.FC = () => { // Define component
             const [storeResponse, productResponse, allStoresResponse] = await Promise.all([ // Fetch store and product data
                 fetch(`/api/stores/${storeId}`),
                 fetch(`/api/products/${productId}`),
-                fetch(`/api/stores`),
+                fetch(`/api/stores`), // Fetch all stores data
             ]);
 
             if (!storeResponse.ok || !productResponse.ok || !allStoresResponse.ok) {
@@ -105,17 +90,17 @@ const IndividualStorePage: React.FC = () => { // Define component
     fetchData(); // Fetch data when component mounts or when storeId or productId changes
     }, [storeId, productId]);
 
-    const handleDistanceChange = (event: React.FormEvent<HTMLSelectElement>) => {
+    const handleDistanceChange = (event: React.FormEvent<HTMLSelectElement>) => { // Update selected distance state when the distance dropdown is changed 
         setSelectedDistance(event.target.value);
     };
 
-    const filteredStores = allStores.filter(store => {
+    const filteredStores = allStores.filter(store => { // Filter stores based on selected distance
         if (selectedDistance === 'all') return true;
-        const storeDistance = parseFloat(store.distance.replace(' miles', ''));
+        const storeDistance = parseFloat(store.distance.replace(' miles', '')); // Convert store distance to number
         return storeDistance <= parseFloat(selectedDistance);
     });
 
-    const handleStoreChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    const handleStoreChange = (event: React.ChangeEvent<HTMLSelectElement>) => { // Navigate to new store page when a different store is selected 
         const newStoreId = event.target.value;
         router.push(`/stores/${newStoreId}/product/${productId}`);
   };
@@ -125,7 +110,6 @@ const IndividualStorePage: React.FC = () => { // Define component
   }
 
     
-
   return (
     <div style={{
         display: 'flex',
@@ -136,6 +120,18 @@ const IndividualStorePage: React.FC = () => { // Define component
         padding: '20px',
         textAlign: 'center',
     }}>
+        <Link href="/" style={{
+      position: 'absolute',
+      top: '20px',
+      left: '20px',
+      padding: '10px 20px',
+      backgroundColor: 'black',
+      color: 'white',
+      textDecoration: 'none',
+      borderRadius: '5px',
+    }}>
+      Home
+    </Link>
       {/* <h1>Store Details</h1>
       {store ? (
         <>
@@ -211,7 +207,10 @@ export default IndividualStorePage; */}
           )}
           <p><strong>Product Name:</strong> {product.name}</p>
           <p><strong>Description:</strong> {product.description}</p>
-          <p><strong>Price:</strong> {product.price !== undefined ? `$${product.price.toFixed(2)}` : 'Price Not Available'}</p>
+          <p><strong>Price:</strong> {product.store_data[storeId as string]?.available
+        ? `$${product.store_data[storeId as string].price.toFixed(2)}`
+        : 'Not available at this store'
+        }</p>
         </div>
       )}
     </div>
