@@ -47,7 +47,7 @@ interface Product {
 }
 
 
-const IndividualStorePage: React.FC = () => {
+const IndividualStorePage: React.FC = () => { // Define component
   const { storeId, productId } = useParams(); // Access dynamic parameters from URL
   const [store, setStore] = useState<Store | null>(null); // Type store state
   const [product, setProduct] = useState<Product | null>(null); // Type product state
@@ -61,8 +61,8 @@ if (!storeId ||!productId) return;
 
 const fetchData = async () => {
     try {
-        setLoading(true);
-
+        setLoading(true); // Set loading state to true
+// console.log(productId);
         // fetch store data and product data in parallel
         const [storeResponse, productResponse] = await Promise.all([
             fetch(`/api/stores/${storeId}`),
@@ -87,7 +87,7 @@ const fetchData = async () => {
         setLoading(false);
     }
     };
-    fetchData();
+    fetchData(); // Fetch data when component mounts or when storeId or productId changes
     }, [storeId, productId]);
 
 

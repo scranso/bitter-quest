@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import { product_data } from "../product_data";
 
 export async function GET(
-    request: Request,
+    request: Request,   // Request object
     { params }: { params : { productId: string } }
 ) {
     const productId = parseInt(params.productId); 
@@ -12,5 +12,5 @@ export async function GET(
         return NextResponse.json({ error: "Product not found" }, { status: 404 });
     }
 
-    return NextResponse.json(product_data);
+    return NextResponse.json(product);
 }
