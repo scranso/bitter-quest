@@ -43,7 +43,7 @@
 // }
 
 
-import React from'react';
+// import React from'react';
 
 // export default function RootLayout({children}: { children: React.ReactNode }) {
 //   return (
@@ -75,3 +75,15 @@ import React from'react';
 //         </div>
 //     );
 // };
+
+
+import React from'react';
+
+export default function StoresLayout({ children }: { children: React.ReactNode }) {
+    return (
+        <div>
+            {/* <header>Stores Page Header</header> */}
+            <main>{children}</main>
+        </div>
+    );
+}

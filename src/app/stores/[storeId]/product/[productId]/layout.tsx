@@ -17,7 +17,8 @@ interface ProductLayoutProps {
     children: ReactNode; // declaring the children prop will be passed in from the nested pages
 }
 
-const ProductLayout = ({ children}: ProductLayoutProps) => {
+// const ProductLayout = ({ children}: ProductLayoutProps) => {
+const ProductLayout: React.FC<ProductLayoutProps> = ({ children }) => {
   return (
     <div>
       <header>
