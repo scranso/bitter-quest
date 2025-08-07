@@ -67,7 +67,7 @@ if (!storeId ||!productId) return;
 const fetchData = async () => {
     try {
         setLoading(true); // Set loading state to true
-// console.log(productId);
+
         // fetch store data and product data in parallel
         const [storeResponse, productResponse] = await Promise.all([ 
             fetch(`/api/stores/${storeId}`),
@@ -103,40 +103,6 @@ const fetchData = async () => {
     fetchData(); // Fetch data when component mounts or when storeId or productId changes
     }, [storeId, productId]);
 
-
-
-
-
-//   // Fetch store data based on storeId
-//   const fetchStoreData = async () => {
-//     try {
-//       const response = await fetch(`/api/stores/store_data/${storeId}`); 
-//       const storeData: Store = await response.json();
-//       setStore(storeData);
-//     } catch (error) {
-//       console.error('Error fetching store data:', error);
-//     }
-//   };
-
-//   // Fetch product data based on productId
-//   const fetchProductData = async () => {
-//     try {
-//       const response = await fetch(`/api/products/product_data/${productId}`); 
-//       const productData: Product = await response.json();
-//       setProduct(productData);
-//     } catch (error) {
-//       console.error('Error fetching product data:', error);
-//     }
-//   };
-
-  
-//   // Display loading indicator while data is being fetched
-//   if (storeId && productId) {
-//     fetchStoreData();
-//     fetchProductData();
-//     setLoading(false);
-//   }
-// }, [storeId, productId]);
 
   if (loading) {
     return <div>Loading...</div>;
