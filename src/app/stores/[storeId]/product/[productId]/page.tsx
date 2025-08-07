@@ -55,36 +55,75 @@ const IndividualStorePage: React.FC = () => {
 
 
   useEffect(() => {
-  // Fetch store data based on storeId
-  const fetchStoreData = async () => {
-    try {
-      const response = await fetch(`/api/stores/store_data/${storeId}`); 
-      const storeData: Store = await response.json();
-      setStore(storeData);
-    } catch (error) {
-      console.error('Error fetching store data:', error);
-    }
-  };
 
-  // Fetch product data based on productId
-  const fetchProductData = async () => {
+// Only fetch data when storeId and productId are provided
+if (!storeId ||!productId) return;
+
+const fetchData = async () => {
     try {
-      const response = await fetch(`/api/products/product_data/${productId}`); 
-      const productData: Product = await response.json();
-      setProduct(productData);
+        setLoading(true);
+
+        // fetch store data and product data in parallel
+        const [storeResponse, productResponse] = await Promise.all([
+            fetch(`/api/stores/${storeId}`),
+            fetch(`/api/products/${productId}`)
+        ]);
+
+        if (!storeResponse.ok) {
+            throw new Error(`Error fetching store data: ${storeResponse.statusText}`);
+        }
+        if (!productResponse.ok) {
+            throw new Error(`Error fetching product data: ${productResponse.statusText}`);
+    
+            }
+
+        const storeData: Store = await storeResponse.json();
+        const productData: Product = await productResponse.json();
+        setStore(storeData);
+        setProduct(productData);
     } catch (error) {
-      console.error('Error fetching product data:', error);
+        console.error('Error fetching data:', error);
+    } finally {
+        setLoading(false);
     }
-  };
+    };
+    fetchData();
+    }, [storeId, productId]);
+
+
+
+
+
+//   // Fetch store data based on storeId
+//   const fetchStoreData = async () => {
+//     try {
+//       const response = await fetch(`/api/stores/store_data/${storeId}`); 
+//       const storeData: Store = await response.json();
+//       setStore(storeData);
+//     } catch (error) {
+//       console.error('Error fetching store data:', error);
+//     }
+//   };
+
+//   // Fetch product data based on productId
+//   const fetchProductData = async () => {
+//     try {
+//       const response = await fetch(`/api/products/product_data/${productId}`); 
+//       const productData: Product = await response.json();
+//       setProduct(productData);
+//     } catch (error) {
+//       console.error('Error fetching product data:', error);
+//     }
+//   };
 
   
-  // Display loading indicator while data is being fetched
-  if (storeId && productId) {
-    fetchStoreData();
-    fetchProductData();
-    setLoading(false);
-  }
-}, [storeId, productId]);
+//   // Display loading indicator while data is being fetched
+//   if (storeId && productId) {
+//     fetchStoreData();
+//     fetchProductData();
+//     setLoading(false);
+//   }
+// }, [storeId, productId]);
 
   if (loading) {
     return <div>Loading...</div>;
