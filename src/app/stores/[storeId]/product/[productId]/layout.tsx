@@ -18,14 +18,13 @@ interface ProductLayoutProps {
 }
 
 const ProductLayout = ({ children}: ProductLayoutProps) => {
-    console.log("Rendering ProductLayout"); // logging to the console to demonstrate the component's rendering
   return (
     <div>
       <header>
         <h1>Store and Product Layout</h1>
       </header>
       <main>
-        {children} {/* This is where the nested pages will be rendered */}
+        {children} {/* This will render the children passed in from the nested pages */}
       </main>
     </div>
   );
