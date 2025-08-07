@@ -41,7 +41,7 @@ interface Product {
     description: string;
     type: string;
     storeId: string;
-    price?: number;
+    price: number;
     // shipsLocally: boolean;
     // availability: StoreAvailability;
 }
@@ -64,7 +64,7 @@ const fetchData = async () => {
         setLoading(true); // Set loading state to true
 // console.log(productId);
         // fetch store data and product data in parallel
-        const [storeResponse, productResponse] = await Promise.all([
+        const [storeResponse, productResponse] = await Promise.all([ 
             fetch(`/api/stores/${storeId}`),
             fetch(`/api/products/${productId}`)
         ]);
@@ -79,6 +79,7 @@ const fetchData = async () => {
 
         const storeData: Store = await storeResponse.json();
         const productData: Product = await productResponse.json();
+        console.log('fetched product data:', productData);
         setStore(storeData);
         setProduct(productData);
     } catch (error) {
@@ -146,7 +147,7 @@ const fetchData = async () => {
         <>
           <p><strong>Product Name:</strong> {product.name}</p>
           <p><strong>Description:</strong> {product.description}</p>
-          <p><strong>Price:</strong> ${product.price}</p>
+          <p><strong>Price:</strong> ${product.price !== undefined ? '$${product.price.toFixed(2)}' : 'Price not available'}</p>
         </>
       ) : (
         <p>Product data not found.</p>
