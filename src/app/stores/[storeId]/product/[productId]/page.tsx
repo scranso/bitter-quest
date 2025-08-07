@@ -1,37 +1,14 @@
-// "use client"
-// import React from'react';
-// import { useParams } from 'next/navigation';
-
-// const IndividualStorePage: React.FC = () => {
-//     const params = useParams();
-//     const { storeId, productId } = params
-    
-//     // console.log('Params:', params);
-
-
-//     return (
-//         <div>
-
-//             <h1>Store ID: {storeId}</h1>
-//             <h2>Product ID: {productId}</h2>
-//         </div>
-//     );
-// };
-
-// export default IndividualStorePage;
-
-
-
-
-
 "use client"
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'next/navigation';
+import Image from 'next/image';
 
 interface Store {
     id: string;
     name: string;
     address: string;
+    distance: string;
+    phone: string;
     website: string;
 }
 
@@ -51,10 +28,18 @@ interface Product {
     // availability: StoreAvailability;
 }
 
+const productImages: { [key: string]: string } = { // Define product images
+    '1': '/img/product1.jpg',
+    '2': '/img/product2.png',
+    '3': '/img/product3.png',
+    '4': '/img/product4.png',
+    '5': '/img/product5.jpg',
+};
+    
 
 const IndividualStorePage: React.FC = () => { // Define component
   const { storeId, productId } = useParams(); // Access dynamic parameters from URL
-  const [store, setStore] = useState<Store | null>(null); // Type store state
+  const [store, setStore] = useState<Store | null>(null); // Type store state 
   const [product, setProduct] = useState<Product | null>(null); // Type product state
   const [loading, setLoading] = useState(true); // Loading state
 
@@ -87,7 +72,7 @@ const fetchData = async () => {
 
         const priceForStore = productData.store_data[storeId]?.price;
 
-        console.log('fetched product data:', productData);
+        
 
         setStore(storeData);
         setProduct({
@@ -104,25 +89,39 @@ const fetchData = async () => {
     }, [storeId, productId]);
 
 
-  if (loading) {
-    return <div>Loading...</div>;
-  }
+        if (loading) {
+            return <div>Loading...</div>;
+        }
 
   return (
-    <div>
+    <div style={{
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        minHeight: '100vh',
+        padding: '20px',
+        textAlign: 'center',
+    }}>
       <h1>Store Details</h1>
       {store ? (
         <>
-          <p><strong>Store Name:</strong> {store.name}</p>
+          <p><strong>Store:</strong> {store.name}</p>
           <p><strong>Address:</strong> {store.address}</p>
+          <p><strong>Distance From Downtown Louisville:</strong> {store.distance}</p>
+          <p><strong>Phone:</strong> {store.phone}</p>
+          <p><strong>Website:</strong> <a href={store.website} target="_blank" rel="noopener noreferrer">{store.website}</a></p>
         </>
-      ) : (
+      ) : ( 
         <p>Store data not found.</p>
       )}
 
       <h2>Product Details</h2>
       {product ? (
         <>
+          {productImages[product.id] && ( // Display product image if available
+            <Image src={productImages[product.id]} alt={product.name} width={300} height={600} /> 
+          )}
           <p><strong>Product Name:</strong> {product.name}</p>
           <p><strong>Description:</strong> {product.description}</p>
           <p><strong>Price:</strong> {product.price !== undefined ? `$${product.price.toFixed(2)}` : 'Price Not Available'} </p> 

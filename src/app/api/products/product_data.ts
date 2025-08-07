@@ -137,7 +137,7 @@ export const product_data = [
     {
         id: 4,
         name: "Carpano Antica Formula Sweet Vermouth",
-        description: "Colour: light brown with an amber hue. – Nose: bouquet of vanilla with spicy, citrusy and dried fruit notes of almond, raisins and cloves. – Palate: well-rounded, rich vanilla taste that picks up the aromas from the nose. Combines well with the bitter orange, dates, cocoa beans and saffron flavours.(“Antica Formula”, www.carpano.com/",
+        description: "Colour: light brown with an amber hue. – Nose: bouquet of vanilla with spicy, citrusy and dried fruit notes of almond, raisins and cloves. – Palate: well-rounded, rich vanilla taste that picks up the aromas from the nose. Combines well with the bitter orange, dates, cocoa beans and saffron flavours.(“Antica Formula”, www.carpano.com/)",
         // price: 28.09,
         type: "Vermouth",
 
