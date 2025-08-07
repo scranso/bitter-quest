@@ -1,4 +1,3 @@
-
 // "use client"
 // import React from'react';
 // import { useParams } from 'next/navigation';
@@ -59,7 +58,7 @@ const IndividualStorePage: React.FC = () => {
   // Fetch store data based on storeId
   const fetchStoreData = async () => {
     try {
-      const response = await fetch(`/api/stores/store_data/${storeId}`); //using query parameters to fetch data from API
+      const response = await fetch(`/api/stores/store_data/${storeId}`); 
       const storeData: Store = await response.json();
       setStore(storeData);
     } catch (error) {
@@ -70,7 +69,7 @@ const IndividualStorePage: React.FC = () => {
   // Fetch product data based on productId
   const fetchProductData = async () => {
     try {
-      const response = await fetch(`/api/products/product_data/${productId}`); //using query parameters to fetch data from API
+      const response = await fetch(`/api/products/product_data/${productId}`); 
       const productData: Product = await response.json();
       setProduct(productData);
     } catch (error) {
@@ -86,7 +85,6 @@ const IndividualStorePage: React.FC = () => {
     setLoading(false);
   }
 }, [storeId, productId]);
-
 
   if (loading) {
     return <div>Loading...</div>;
