@@ -1,36 +1,65 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Bitter Quest
 
-## Getting Started
+Bitter Quest is a web application that helps amari and cocktail enthusiasts find scarcely available amari and liqueurs in the closest available stores. It allows users to browse products, check their availability in different stores, filter searches by distance, and view detailed information about both products and stores. 
 
-First, run the development server:
+## Features 
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- Browse a specialized list of amari and liqueur products displayed in the app
+- View detailed information about each product, including description and price
+- Check product availability across multiple stores
+- Filter stores by distance
+- View detailed information about each store, including address, distance from a centralized location, and contact information
+- Responsive design for various screen sizes
+- Custom API
+- Live deployment (https://bitter-quest-wy4l.vercel.app/stores/5/product/4)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Technology Stack
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- Next.js
+- React
+- TypeScript
+- CSS Modules
 
-## Learn More
+## Launching The Thing
 
-To learn more about Next.js, take a look at the following resources:
+### What You Need
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- Node.js (version 14 or later)
+- npm (comes with Node.js)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### To Install
 
-## Deploy on Vercel
+1. Clone the repository
+   
+```git clone https://github.com/scranso/bitter-quest.git```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+2. Navigate to the project directory:
+   
+```cd bitter-quest```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+3. Install dependencies:
+   
+```npm install```
+
+4. Start the development server:
+   
+```npm run dev```
+
+5. Open your browser and visit `http://localhost:3000`
+
+
+## Project Structure
+
+- `/src/app`: Contains the main applicaiton code
+- `/api`: Contains the local API and routes for fetching data
+- `/stores`: Store-related pages
+- `/products`: Product-related pages
+- `/public`: Static assets like images
+
+## API Routes - (because the naming conventions got a little out of hand)
+
+- `/api/stores `: Fetches all stores
+- `/api/stores/[storeId`: Fetches detailes for a specific store
+- `/api/products`: Fetches all products
+- `/api/products/[productId] `: Fetches details for a specific product
