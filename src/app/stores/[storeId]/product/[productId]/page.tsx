@@ -20,7 +20,7 @@ interface Product {
     type: string;
     store_data: {
         [storeId: string]: {
-            available: boolean;
+            availability: boolean;
             price: number;
         }
     };
@@ -60,7 +60,6 @@ const IndividualStorePage: React.FC = () => { // Define component
 
 
   useEffect(() => {
-
     const fetchData = async () => {
         try {
             setLoading(true); // Set loading state to true
@@ -78,6 +77,10 @@ const IndividualStorePage: React.FC = () => { // Define component
             const productData: Product = await productResponse.json();
             const allStoresData: Store[] = await allStoresResponse.json();
 
+            console.log('Fetched store data:', storeData);
+            console.log('Fetched product data:', productData);
+            console.log('Fetched all stores data:', allStoresData);
+
             setStore(storeData);
             setProduct(productData);
             setAllStores(allStoresData);
@@ -89,6 +92,15 @@ const IndividualStorePage: React.FC = () => { // Define component
         };
     fetchData(); // Fetch data when component mounts or when storeId or productId changes
     }, [storeId, productId]);
+
+    useEffect(() => {
+        console.log('BBBBBB');
+        console.log('Store:', store?.id);
+        console.log('Current product:', product?.store_data);
+        if (product && storeId) {
+            console.log('Store data for current product:', product.store_data[storeId as string].availability);
+        }
+      }, [storeId, productId, store, product]);
 
     const handleDistanceChange = (event: React.FormEvent<HTMLSelectElement>) => { // Update selected distance state when the distance dropdown is changed 
         setSelectedDistance(event.target.value);
@@ -102,7 +114,7 @@ const IndividualStorePage: React.FC = () => { // Define component
 
     const handleStoreChange = (event: React.ChangeEvent<HTMLSelectElement>) => { // Navigate to new store page when a different store is selected 
         const newStoreId = event.target.value;
-        router.push(`/stores/${newStoreId}/product/${productId}`);
+        router.push(`/stores/${newStoreId}/product/${productId}`, undefined, { shallow: false }); // Navigate to new store page by passing new storeId and productId as query parameters
   };
 
  if (loading) {
@@ -207,9 +219,14 @@ export default IndividualStorePage; */}
           )}
           <p><strong>Product Name:</strong> {product.name}</p>
           <p><strong>Description:</strong> {product.description}</p>
-          <p><strong>Price:</strong> {product.store_data[storeId as string]?.available
-        ? `$${product.store_data[storeId as string].price.toFixed(2)}`
-        : 'Not available at this store'
+          <p><strong>Price:</strong> {
+        
+          product.store_data && storeId && product.store_data[storeId as string]
+          ? product.store_data[storeId as string].availability
+
+            ? `$${product.store_data[storeId as string].price.toFixed(2)}`
+            : 'Not available at this store'
+          : 'Price data not found'
         }</p>
         </div>
       )}
