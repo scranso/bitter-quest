@@ -95,7 +95,7 @@ const IndividualStorePage: React.FC = () => { // Define component
       }, [storeId, productId, store, product]);
 
     const handleDistanceChange = (event: React.FormEvent<HTMLSelectElement>) => { // Update selected distance state when the distance dropdown is changed 
-        setSelectedDistance(event.target.value);
+        setSelectedDistance((event.target as HTMLSelectElement).value);
     };
 
     const filteredStores = allStores.filter(store => { // Filter stores based on selected distance
@@ -106,7 +106,7 @@ const IndividualStorePage: React.FC = () => { // Define component
 
     const handleStoreChange = (event: React.ChangeEvent<HTMLSelectElement>) => { // Navigate to new store page when a different store is selected 
         const newStoreId = event.target.value;
-        router.push(`/stores/${newStoreId}/product/${productId}`, undefined, { shallow: false }); // Navigate to new store page by passing new storeId and productId as query parameters
+        router.push(`/stores/${newStoreId}/product/${productId}`); // Navigate to new store page by passing new storeId and productId as query parameters
   };
 
  if (loading) {
