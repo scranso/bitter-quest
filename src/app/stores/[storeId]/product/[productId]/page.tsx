@@ -24,9 +24,6 @@ interface Product {
             price: number;
         }
     };
-    // price: number;
-    // shipsLocally: boolean;
-    // availability: StoreAvailability;
 }
 
 const productImages: { [key: string]: string } = { // Defining product images
@@ -77,9 +74,6 @@ const IndividualStorePage: React.FC = () => { // Define component
             const productData: Product = await productResponse.json();
             const allStoresData: Store[] = await allStoresResponse.json();
 
-            console.log('Fetched store data:', storeData);
-            console.log('Fetched product data:', productData);
-            console.log('Fetched all stores data:', allStoresData);
 
             setStore(storeData);
             setProduct(productData);
@@ -94,9 +88,7 @@ const IndividualStorePage: React.FC = () => { // Define component
     }, [storeId, productId]);
 
     useEffect(() => {
-        console.log('BBBBBB');
-        console.log('Store:', store?.id);
-        console.log('Current product:', product?.store_data);
+        
         if (product && storeId) {
             console.log('Store data for current product:', product.store_data[storeId as string].availability);
         }
