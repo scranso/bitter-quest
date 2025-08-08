@@ -124,57 +124,17 @@ const IndividualStorePage: React.FC = () => { // Define component
         padding: '20px',
         textAlign: 'center',
     }}>
-        <Link href="/" style={{
-      position: 'absolute',
-      top: '20px',
-      left: '20px',
-      padding: '10px 20px',
-      backgroundColor: 'black',
-      color: 'white',
-      textDecoration: 'none',
-      borderRadius: '5px',
-    }}>
+        <Link className="home-button" href="/" // Link to home page when clicked on the home button */}
+   >
       Home
     </Link>
-      {/* <h1>Store Details</h1>
-      {store ? (
-        <>
-          <p><strong>Store:</strong> {store.name}</p>
-          <p><strong>Address:</strong> {store.address}</p>
-          <p><strong>Distance From Downtown Louisville:</strong> {store.distance}</p>
-          <p><strong>Phone:</strong> {store.phone}</p>
-          <p><strong>Website:</strong> <a href={store.website} target="_blank" rel="noopener noreferrer">{store.website}</a></p>
-        </>
-      ) : ( 
-        <p>Store data not found.</p>
-      )}
-
-      <h2>Product Details</h2>
-      {product ? (
-        <>
-          {productImages[product.id] && ( // Display product image if available
-            <Image src={productImages[product.id]} alt={product.name} width={300} height={600} /> 
-          )}
-          <p><strong>Product Name:</strong> {product.name}</p>
-          <p><strong>Description:</strong> {product.description}</p>
-          <p><strong>Price:</strong> {product.price !== undefined ? `$${product.price.toFixed(2)}` : 'Price Not Available'} </p> 
-          {valueScore && (
-            <p><strong>Value Score:</strong> {valueScore.toFixed(2)} (higher is better)</p>
-            )}
-        </>
-      ) : (
-        <p>Product data not found.</p>
-      )}
-    </div>
-  );
-};
-
-export default IndividualStorePage; */}
+      
 <h1>Product and Store Details</h1>
       
       <div>
         <label htmlFor="distanceFilter">Filter stores by distance: </label>
-        <select id="distanceFilter" value={selectedDistance} onChange={handleDistanceChange}>
+        <select id="distanceFilter" value={selectedDistance} onChange={handleDistanceChange}
+        className="distance-select">
           {distanceOptions.map(option => (
             <option key={option.value} value={option.value}>{option.label}</option>
           ))}
@@ -183,7 +143,8 @@ export default IndividualStorePage; */}
 
       <div>
         <label htmlFor="storeSelect">Select a store: </label>
-        <select id="storeSelect" value={storeId as string} onChange={handleStoreChange}>
+        <select id="storeSelect" value={storeId as string} onChange={handleStoreChange}
+        className="store-select">
           {filteredStores.map(store => (
             <option key={store.id} value={store.id}>
               {store.name} ({store.distance})
@@ -192,7 +153,7 @@ export default IndividualStorePage; */}
         </select>
       </div>
 
-      {store && (
+      {/* {store && (
         <div>
           <h2>Store Details</h2>
           <p><strong>Store:</strong> {store.name}</p>
@@ -201,16 +162,16 @@ export default IndividualStorePage; */}
           <p><strong>Phone:</strong> {store.phone}</p>
           <p><strong>Website:</strong> <a href={store.website} target="_blank" rel="noopener noreferrer">{store.website}</a></p>
         </div>
-      )}
+      )} */}
 
       {product && (
-        <div>
+        <div style={{ marginBottom: '20px', marginTop: '20px'}}>
           <h2>Product Details</h2>
           {productImages[product.id] && (
-            <Image src={productImages[product.id]} alt={product.name} width={300} height={600} />
+            <Image style={{ marginBottom: '20px' }} src={productImages[product.id]} alt={product.name} width={300} height={600} />
           )}
-          <p><strong>Product Name:</strong> {product.name}</p>
-          <p><strong>Description:</strong> {product.description}</p>
+          <p><strong>Product Name:</strong> <span style={{ fontWeight: 'bold' }}>{product.name}</span></p>
+          <p><strong>Description:</strong> <span style={{ fontStyle: 'italic' }}>{product.description}</span></p>
           <p><strong>Price:</strong> {
         
           product.store_data && storeId && product.store_data[storeId as string]
@@ -222,6 +183,18 @@ export default IndividualStorePage; */}
         }</p>
         </div>
       )}
+
+        {store && (
+                <div style={{ marginTop: '20px'}}>
+                <h2>Store Details</h2>
+                <p><strong>Store:</strong> {store.name}</p>
+                <p><strong>Address:</strong> {store.address}</p>
+                <p><strong>Distance From Downtown Louisville:</strong> {store.distance}</p>
+                <p><strong>Phone:</strong> {store.phone}</p>
+                <p><strong>Website:</strong> <a href={store.website} target="_blank" rel="noopener noreferrer">{store.website}</a></p>
+                </div>
+            )}
+
     </div>
   );
 };

@@ -21,9 +21,9 @@ interface ProductLayoutProps {
 const ProductLayout: React.FC<ProductLayoutProps> = ({ children }) => {
   return (
     <div>
-      <header>
+      {/* <header>
         <h1>Store and Product Layout</h1>
-      </header>
+      </header> */}
       <main>
         {children} {/* This will render the children passed in from the nested pages */}
       </main>

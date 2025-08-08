@@ -28,3 +28,76 @@ a {
 .available-price:hover {
   text-decoration: underline;
 }
+
+
+.table-container {
+  width: 100%; 
+  overflow-x: auto;  
+}
+/* enable horizontal scrolling of HomePage Table */
+.product-table {
+  min-width: 600px;
+}
+
+.store-select, .distance-select {
+  font-size: 15px;
+  padding: 8px;
+  width: 100%;
+  max-width: 300px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.home-button {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  padding: 10px 20px;
+  background-color: rgb(10, 38, 91);
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+  font-size: 16px;
+  transition: all 0.3s ease;
+}
+
+
+/* media query for smaller screens */
+@media script and (max-width: 767px) {
+  .table-container {
+    -webkit-overflow-scrolling: touch; /* smoooooth touch scrolling */;
+  }
+  h2 {
+    font-size: 1.5rem;
+  }
+  h3 {
+    font-size: 1.2rem;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .store-select, .distance-select {
+    font-size: 18px;
+    padding: 12px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .store-select option, .distance-select option {
+    font-size: 20px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .home-button {
+    padding: 8px 16px;
+    font-size: 14px;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .home-button {
+    padding: 6px 12px;
+    font-size: 12px;
+  }
+}
